@@ -51,12 +51,6 @@ function write (text) {
   document.getElementById('text').innerText = text
 }
 
-function angle (angle) {
-  const $angle = document.getElementById('angle')
-  $angle.innerText = Math.round(angle)
-  $angle.style.transform = `rotate(-${angle}deg)`
-}
-
 class Level {
   constructor (text, angle, percision, time) {
     Object.assign(this, { text, angle, percision, time })
@@ -92,15 +86,30 @@ class Game {
   }
 }
 
+class AngleTracking {
+  start () {
+    this.$angle = document.getElementById('angle')
+    window.addEventListener('deviceorientation', event => { this.setAngle(event.alpha) })
+  }
+
+  setAngle (absoulteAngle) {
+    this.firstAngle = this.firstAngle || absoulteAngle
+    this.angle = absoulteAngle - this.firstAngle
+    $angle.innerText = Math.round(this.angle)
+    $angle.style.transform = `rotate(-${this.angle}deg)`
+  }
+}
+
 const game = new Game([
   new Level("Turn to 90 degrees", 90, 5, 10)
 ])
+const angleTracking = new AngleTracking()
 
 if (!window.DeviceOrientationEvent) {
   write("Orientation not supported")
 } else {
   game.start()
-  window.addEventListener('deviceorientation', event => { angle(event.alpha) })
+  angleTracking.start()
 }
 </script>
 </body>
