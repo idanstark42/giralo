@@ -12,28 +12,34 @@
       width: 100vw;
       height: 100vh;
       background: #4D96FF;
-      color: 6BCB77;
-      font: 2rem 'Patric Hand';
+      color: #6BCB77;
+      font: 2rem 'Patrick Hand';
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
     #text {
       height: 3rem;
     }
 
-    #angle {
+    #angle-container {
       flex-grow: 1;
+    }
+
+    #angle {
       width: 80vw;
-      aspect-ratio: 1;
+      height: 80vw;
       border-radius: 40vw;
       background: #FFD93D;
-      color: #FF6B6B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
 <body>
 <div id="text"></div>
-<div id="angle"></div>
+<div id="angle-container"><div id="angle"></div></div>
 <script type="text/javascript">
 function write (text) {
   document.getElementById('text').innerText = text
