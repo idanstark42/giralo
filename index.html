@@ -69,16 +69,16 @@ class Game {
         this.next()
       }
     })
-    write(this.level().text)
+    // write(this.level().text)
   }
 
   next () {
     this.levelNumber++
     if (!this.level()) {
-      write("DONE!")
+      // write("DONE!")
       return
     }
-    write(this.level().text)
+    // write(this.level().text)
   }
 
   level () {
@@ -88,9 +88,11 @@ class Game {
 
 class AngleTracking {
   start () {
+    write('init')
     this.$angle = document.getElementById('angle')
+    write('init1')
     window.addEventListener('deviceorientation', event => { this.setAngle(event.alpha) })
-    text('init')
+    write('init2')
   }
 
   setAngle (absoulteAngle) {
