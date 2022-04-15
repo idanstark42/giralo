@@ -128,7 +128,10 @@ const game = new Game([
   new Level("Turn to 90°", 90, 5, 10),
   new Level("180°", 180, 5, 10),
   new Level("30°", 30, 5, 10),
-  new Level("135°", 135, 5, 10)
+  new Level("135°", 135, 5, 10),
+  new Level("-180°", -180, 5, 10),
+  new Level("-25°", -25, 5, 10),
+  new Level("0°, but exactly", 0, 0, 10)
 ], angleTracking)
 
 if (!window.DeviceOrientationEvent) {
