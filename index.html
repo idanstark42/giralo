@@ -52,7 +52,9 @@ function write (text) {
 }
 
 function angle (angle) {
-  document.getElementById('angle').innerText = Math.round(angle)
+  const $angle = document.getElementById('angle')
+  $angle.innerText = Math.round(angle)
+  $angle.style.transform = `rotate(-${angle}deg)`
 }
 
 class Level {
