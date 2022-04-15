@@ -95,7 +95,7 @@ class Game {
 class AngleTracking {
   start () {
     this.$angle = document.getElementById('angle')
-    window.addEventListener('deviceorientation', event => { throttle('angleview', 500, () => this.setAngle(event.alpha)) })
+    window.addEventListener('deviceorientation', event => { throttle('angleview', 50, () => this.setAngle(event.alpha)) })
   }
 
   setAngle (absoulteAngle) {
