@@ -109,8 +109,8 @@ class AngleTracking {
   }
 
   setAngle (absoulteAngle) {
-    this.firstAngle = this.firstAngle || absoulteAngle
-    this.angle = Math.round(absoulteAngle - this.firstAngle)
+    this.angle = this.angle + Math.round(absoulteAngle - this.lastAngle)
+    this.lastAngle = this.angle
     this.$angle.innerText = this.angle
     this.$angle.style.transform = `rotate(${this.angle}deg)`
     this.listeners.forEach(listener => listener(this.angle))
