@@ -88,18 +88,21 @@ class Game {
 
 class AngleTracking {
   start () {
-    write('init')
     this.$angle = document.getElementById('angle')
-    write('init1')
     window.addEventListener('deviceorientation', event => { this.setAngle(event.alpha) })
-    write('init2')
+    write('init')
   }
 
   setAngle (absoulteAngle) {
+    write('angle1')
     this.firstAngle = this.firstAngle || absoulteAngle
+    write('angle2')
     this.angle = Math.round(absoulteAngle - this.firstAngle)
+    write('angle3')
     $angle.innerText = this.angle
+    write('angle4')
     $angle.style.transform = `rotate(-${this.angle}deg)`
+    write('angle5')
   }
 }
 
