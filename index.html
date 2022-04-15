@@ -90,12 +90,13 @@ class AngleTracking {
   start () {
     this.$angle = document.getElementById('angle')
     window.addEventListener('deviceorientation', event => { this.setAngle(event.alpha) })
+    text('init')
   }
 
   setAngle (absoulteAngle) {
     this.firstAngle = this.firstAngle || absoulteAngle
-    this.angle = absoulteAngle - this.firstAngle
-    $angle.innerText = Math.round(this.angle)
+    this.angle = Math.round(absoulteAngle - this.firstAngle)
+    $angle.innerText = this.angle
     $angle.style.transform = `rotate(-${this.angle}deg)`
   }
 }
