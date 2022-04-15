@@ -52,9 +52,8 @@ function write (text) {
 }
 
 function throttle (name, time, callback) {
-  write('throttle')
-  if (throttle.timeoutes[name]) clearTimeout(throttle.timeouts[name])
-  throttle.timeoutes[name] = setTimeout(callback, time)
+  if (throttle.timeouts[name]) clearTimeout(throttle.timeouts[name])
+  throttle.timeouts[name] = setTimeout(callback, time)
 }
 throttle.timeouts = {}
 
