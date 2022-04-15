@@ -109,7 +109,7 @@ class AngleTracking {
   }
 
   setAngle (absoulteAngle) {
-    if (!this.lastAngle)  this.lastAngle = Math.round(absoulteAngle)
+    if (this.lastAngle === undefined)  this.lastAngle = Math.round(absoulteAngle)
     this.angle = Math.round((this.angle || 0) + absoulteAngle - this.lastAngle)
     this.lastAngle = this.angle
     this.$angle.innerText = this.angle
