@@ -26,14 +26,24 @@ class Game {
 
   start () {
     window.addEventListener('deviceorientation', () => {
-      if (Math.abs(this.alpha - this.levels[this.levelNumber].angle) < this.levels[this.levelNumber].percision) {
+      if (Math.abs(this.alpha - this.level().angle) < this.level().percision) {
         this.next()
       }
     })
+    write(this.level().text)
   }
 
   next () {
     this.levelNumber++
+    if (!this.level()) {
+      write("DONE!")
+      return
+    }
+    write(this.level().text)
+  }
+
+  level () {
+    return this.levels[this.levelNumber]
   }
 }
 
@@ -45,7 +55,6 @@ if (!window.DeviceOrientationEvent) {
   write("Orientation not supported")
 } else {
   game.start()
-  window.addEventListener("deviceorientation", event => write(`${Math.round(event.alpha)}, ${Math.round(event.beta)}, ${Math.round(event.gamma)}`))
 }
 </script>
 </body>
