@@ -76,7 +76,7 @@ class Game {
 
   start () {
     this.angleTracking.onChange(angle => {
-      if (Math.abs(angle - this.level().angle) < this.level().percision) {
+      if (Math.abs(angle - this.level().angle) <= this.level().percision) {
         this.next()
       }
     })
