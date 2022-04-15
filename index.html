@@ -51,6 +51,12 @@ function write (text) {
   document.getElementById('text').innerText = text
 }
 
+function throttle (name, time, callback) {
+  if (throttle.timeoutes[name]) clearTimeout(throttle.timeouts[name])
+  throttle.timeoutes[name] = setTimeout(callback, time)
+}
+throttle.timeouts = {}
+
 class Level {
   constructor (text, angle, percision, time) {
     Object.assign(this, { text, angle, percision, time })
@@ -89,7 +95,7 @@ class Game {
 class AngleTracking {
   start () {
     this.$angle = document.getElementById('angle')
-    window.addEventListener('deviceorientation', event => { this.setAngle(event.alpha) })
+    window.addEventListener('deviceorientation', event => { throttle('angleview', 500, () => this.setAngle(event.alpha)) })
   }
 
   setAngle (absoulteAngle) {
