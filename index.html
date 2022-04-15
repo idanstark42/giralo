@@ -105,7 +105,7 @@ class AngleTracking {
 
   start () {
     this.$angle = document.getElementById('angle')
-    window.addEventListener('deviceorientation', event => { throttle('angleview', 50, () => this.setAngle(event.alpha)) })
+    window.addEventListener('deviceorientation', event => { throttle('angleview', 10, () => this.setAngle(event.alpha)) })
   }
 
   setAngle (absoulteAngle) {
@@ -123,7 +123,10 @@ class AngleTracking {
 
 const angleTracking = new AngleTracking()
 const game = new Game([
-  new Level("Turn to 90 degrees", 90, 5, 10)
+  new Level("Turn to 90°", 90, 5, 10),
+  new Level("180°", 180, 5, 10),
+  new Level("30°", 30, 5, 10),
+  new Level("135°", 135, 5, 10)
 ], angleTracking)
 
 if (!window.DeviceOrientationEvent) {
