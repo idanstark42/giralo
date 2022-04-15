@@ -15,7 +15,7 @@ function write (text) {
 if (!window.DeviceOrientationEvent) {
   write("Orientation not supported")
 } else {
-  window.addEventListener("deviceorientation", event => write(`${event.alpha}, ${event.beta}, ${event.gamma}`))
+  window.addEventListener("deviceorientation", event => write(`${Math.round(event.alpha)}, ${Math.round(event.beta)}, ${Math.round(event.gamma)}`))
 }
 </script>
 </body>
