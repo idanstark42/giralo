@@ -108,10 +108,10 @@ class AngleTracking {
     window.addEventListener('deviceorientation', event => { throttle('angleview', 10, () => this.setAngle(event.alpha)) })
   }
 
-  setAngle (absoulteAngle=0) {
-    if (this.lastAngle === undefined) this.lastAngle = absoulteAngle
-    if (this.angle === undefined) this.angle = absoulteAngle
-    this.angle = this.angle + Math.round(absoulteAngle - this.lastAngle)
+  setAngle (absoulteAngle) {
+    if (this.lastAngle === undefined) this.lastAngle = Math.round(absoulteAngle)
+    if (this.angle === undefined) this.angle = Math.round(absoulteAngle)
+    this.angle = Math.round(this.angle + absoulteAngle - this.lastAngle)
     this.lastAngle = this.angle
     this.$angle.innerText = this.angle
     this.$angle.style.transform = `rotate(${this.angle}deg)`
