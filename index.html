@@ -111,7 +111,7 @@ class AngleTracking {
   setAngle (absoulteAngle) {
     if (this.lastAngle === undefined)  this.lastAngle = Math.round(absoulteAngle)
     const diff = Math.round(absoulteAngle) - this.lastAngle
-    this.angle = (this.angle || 0) + ((diff > 180) ? (360 - diff) : diff)
+    this.angle = (this.angle || 0) + ((Math.abs(diff) > 180) ? (360 - Math.abs(diff)) * (diff / Math.abs(diff)) : diff)
     this.lastAngle = Math.round(absoulteAngle)
     this.$angle.innerText = this.angle
     this.$angle.style.transform = `rotate(${this.angle}deg)`
