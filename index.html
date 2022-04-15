@@ -68,18 +68,20 @@ class Level {
 }
 
 class Game {
-  constructor (levels) {
+  constructor (levels, angleTracking) {
     this.levels = levels
+    this.angleTracking = angleTracking
     this.levelNumber = 0
   }
 
   start () {
-    window.addEventListener('deviceorientation', event => {
-      if (Math.abs(event.alpha - this.level().angle) < this.level().percision) {
+    this.angleTracking.onChange(angle => {
+      if (Math.abs(angle - this.level().angle) < this.level().percision) {
         this.next()
       }
     })
     write(this.level().text)
+    this.angleTracking.start()
   }
 
   next () {
@@ -97,6 +99,10 @@ class Game {
 }
 
 class AngleTracking {
+  constructor () {
+    this.listeners = []
+  }
+
   start () {
     this.$angle = document.getElementById('angle')
     window.addEventListener('deviceorientation', event => { throttle('angleview', 50, () => this.setAngle(event.alpha)) })
@@ -107,19 +113,23 @@ class AngleTracking {
     this.angle = Math.round(absoulteAngle - this.firstAngle)
     this.$angle.innerText = this.angle
     this.$angle.style.transform = `rotate(${this.angle}deg)`
+    this.listeners.forEach(listener => listener(this.angle))
+  }
+
+  onChange (listener) {
+    this.listeners.push(listener)
   }
 }
 
+const angleTracking = new AngleTracking()
 const game = new Game([
   new Level("Turn to 90 degrees", 90, 5, 10)
-])
-const angleTracking = new AngleTracking()
+], angleTracking)
 
 if (!window.DeviceOrientationEvent) {
   write("Orientation not supported")
 } else {
   game.start()
-  angleTracking.start()
 }
 </script>
 </body>
