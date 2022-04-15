@@ -7,9 +7,14 @@
 </head>
 <body>
 <div id="text"></div>
+<div id="angle"></div>
 <script type="text/javascript">
 function write (text) {
   document.getElementById('text').innerText = text
+}
+
+function angle (angle) {
+  document.getElementById('text').innerText = Math.round(angle)
 }
 
 class Level {
@@ -25,8 +30,8 @@ class Game {
   }
 
   start () {
-    window.addEventListener('deviceorientation', () => {
-      if (Math.abs(this.alpha - this.level().angle) < this.level().percision) {
+    window.addEventListener('deviceorientation', event => {
+      if (Math.abs(event.alpha - this.level().angle) < this.level().percision) {
         this.next()
       }
     })
@@ -55,6 +60,7 @@ if (!window.DeviceOrientationEvent) {
   write("Orientation not supported")
 } else {
   game.start()
+  window.addEventListener('deviceorientation', event => { angle(event.alpha) })
 }
 </script>
 </body>
